@@ -50,7 +50,7 @@ do_run(Command, return_code) ->
 -ifdef(TEST).
 -include_lib("eunit/include/eunit.hrl").
 
--define(NUM_BYTES, 100000000). %% ~10MiB
+-define(NUM_BYTES, 10000000). %% ~1MiB
 
 return_code_success_test() ->
     ?assertEqual(0, ?MODULE:run("ls", return_code)).
