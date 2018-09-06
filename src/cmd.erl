@@ -56,7 +56,7 @@ return_code_success_test() ->
     ?assertEqual(0, ?MODULE:run("ls", return_code)).
 
 return_code_failure_test() ->
-    ?assertEqual(64, ?MODULE:run("cp /", return_code)).
+    ?assertEqual(get_unix_error_code(), ?MODULE:run("cp /", return_code)).
 
 return_code_from_text_output_with_breakline_test() ->
     ?assertEqual(0, ?MODULE:run("echo \"..........1\"", return_code)).
@@ -93,5 +93,11 @@ big_truncated_output_test_() ->
         Opts = [{mode, output}, {max_size, MaxOutputBytes}],
         ?assertEqual(MaxOutputBytes, length(?MODULE:run(Command, Opts)))
     end}.
+
+get_unix_error_code() ->
+    case os:type() of
+        {unix, darwin} -> 64;
+        _ -> 1
+    end.
 
 -endif.
