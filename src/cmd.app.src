@@ -1,0 +1,14 @@
+{application, cmd,
+ [{description, "Alternative to os:cmd with option to get return codes"},
+  {vsn, "1.0.0"},
+  {registered, []},
+  {applications,
+   [kernel,
+    stdlib
+   ]},
+  {env,[]},
+  {modules, []},
+  {maintainers, ["Goncalo Tomas"]},
+  {licenses, ["Apache 2.0"]},
+  {links, [{"Github", "https://github.com/goncalotomas/cmd"}]}
+ ]}.
