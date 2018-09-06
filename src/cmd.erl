@@ -68,8 +68,8 @@ return_code_from_text_output_without_breakline_test() ->
 simple_output_command_test() ->
     {ok, Cwd} = file:get_cwd(),
     {ok, Ls} = file:list_dir(Cwd),
-    DirContents = string:join(Ls, "\n") ++ "\n",
-    ?assertEqual(DirContents, ?MODULE:run("ls")).
+    DirContents = string:join(lists:sort(Ls), "\n") ++ "\n",
+    ?assertEqual(DirContents, string:sub_string(?MODULE:run("ls -a"), 6)).
 
 big_return_code_test_() ->
     {timeout, 120, fun() ->
