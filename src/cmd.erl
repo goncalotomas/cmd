@@ -65,11 +65,10 @@ return_code_from_text_output_without_breakline_test() ->
     Command = "perl -e \"print '.' x 10;\"",
     ?assertEqual(0, ?MODULE:run(Command, return_code)).
 
-simple_output_command_test() ->
-    {ok, Cwd} = file:get_cwd(),
-    {ok, Ls} = file:list_dir(Cwd),
-    DirContents = string:join(lists:sort(Ls), "\n") ++ "\n",
-    ?assertEqual(DirContents, string:sub_string(?MODULE:run("ls -a"), 6)).
+simple_output_test() ->
+    String = "cmd can be useful!",
+    Output = ?MODULE:run("echo \"" ++ String ++ "\""),
+    ?assertEqual(String ++ "\n", Output).
 
 big_return_code_test_() ->
     {timeout, 120, fun() ->
