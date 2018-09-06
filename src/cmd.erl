@@ -66,8 +66,10 @@ return_code_from_text_output_without_breakline_test() ->
     ?assertEqual(0, ?MODULE:run(Command, return_code)).
 
 simple_output_command_test() ->
-    LibContents = "LICENSE\nREADME.md\n_build\nrebar.config\nrebar.lock\nsrc\n",
-    ?assertEqual(LibContents, ?MODULE:run("ls")).
+    {ok, Cwd} = file:get_cwd(),
+    {ok, Ls} = file:list_dir(Cwd),
+    DirContents = string:join(Ls, "\n") ++ "\n",
+    ?assertEqual(DirContents, ?MODULE:run("ls")).
 
 big_return_code_test_() ->
     {timeout, 120, fun() ->
